@@ -1,0 +1,24 @@
+{
+  "name": "@tsonic/js-globals",
+  "version": "0.1.0",
+  "description": "Global type definitions for Tsonic JS mode (noLib: true, JavaScript semantics)",
+  "main": "index.d.ts",
+  "types": "index.d.ts",
+  "files": [
+    "index.d.ts",
+    "README.md"
+  ],
+  "keywords": [
+    "tsonic",
+    "typescript",
+    "javascript",
+    "types",
+    "globals"
+  ],
+  "author": "Tsonic Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tsoniclang/js-globals.git"
+  }
+}
