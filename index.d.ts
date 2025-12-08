@@ -8,7 +8,12 @@
  *
  * Key principle: Array<T> HAS JS members like .length and .map
  * This enables JS-style programming while compiling to C# with Tsonic.JSRuntime
+ *
+ * Index-space values (length, indexOf, etc.) use branded `int` type from
+ * @tsonic/types to enable numeric proof validation for array indexing.
  */
+
+import { int } from "@tsonic/types";
 
 declare global {
   /**
@@ -33,7 +38,7 @@ declare global {
     /**
      * Gets or sets the length of the array.
      */
-    length: number;
+    length: int;
 
     /**
      * Returns the item located at the specified index.
@@ -43,7 +48,7 @@ declare global {
     /**
      * Appends new elements to the end of an array, and returns the new length.
      */
-    push(...items: T[]): number;
+    push(...items: T[]): int;
 
     /**
      * Removes the last element from an array and returns it.
@@ -58,7 +63,7 @@ declare global {
     /**
      * Inserts new elements at the start of an array, and returns the new length.
      */
-    unshift(...items: T[]): number;
+    unshift(...items: T[]): int;
 
     /**
      * Returns a copy of a section of an array.
@@ -73,12 +78,12 @@ declare global {
     /**
      * Returns the index of the first occurrence of a value in an array, or -1 if it is not present.
      */
-    indexOf(searchElement: T, fromIndex?: number): number;
+    indexOf(searchElement: T, fromIndex?: number): int;
 
     /**
      * Returns the index of the last occurrence of a specified value in an array, or -1 if it is not present.
      */
-    lastIndexOf(searchElement: T, fromIndex?: number): number;
+    lastIndexOf(searchElement: T, fromIndex?: number): int;
 
     /**
      * Determines whether all the members of an array satisfy the specified test.
@@ -118,7 +123,7 @@ declare global {
     /**
      * Returns the index of the first element in the array where predicate is true, and -1 otherwise.
      */
-    findIndex(predicate: (value: T, index: number, array: T[]) => unknown): number;
+    findIndex(predicate: (value: T, index: number, array: T[]) => unknown): int;
 
     /**
      * Determines whether an array includes a certain element.
@@ -162,11 +167,11 @@ declare global {
   }
 
   interface ReadonlyArray<T> {
-    readonly length: number;
+    readonly length: int;
     readonly [n: number]: T;
     slice(start?: number, end?: number): T[];
-    indexOf(searchElement: T, fromIndex?: number): number;
-    lastIndexOf(searchElement: T, fromIndex?: number): number;
+    indexOf(searchElement: T, fromIndex?: number): int;
+    lastIndexOf(searchElement: T, fromIndex?: number): int;
     every(predicate: (value: T, index: number, array: readonly T[]) => unknown): boolean;
     some(predicate: (value: T, index: number, array: readonly T[]) => unknown): boolean;
     forEach(callbackfn: (value: T, index: number, array: readonly T[]) => void): void;
@@ -174,7 +179,7 @@ declare global {
     filter(predicate: (value: T, index: number, array: readonly T[]) => unknown): T[];
     reduce<U>(callbackfn: (previousValue: U, currentValue: T, currentIndex: number, array: readonly T[]) => U, initialValue: U): U;
     find(predicate: (value: T, index: number, array: readonly T[]) => unknown): T | undefined;
-    findIndex(predicate: (value: T, index: number, array: readonly T[]) => unknown): number;
+    findIndex(predicate: (value: T, index: number, array: readonly T[]) => unknown): int;
     includes(searchElement: T, fromIndex?: number): boolean;
     concat(...items: (T | readonly T[])[]): T[];
     join(separator?: string): string;
@@ -198,7 +203,7 @@ declare global {
     /**
      * Returns the length of a String object.
      */
-    readonly length: number;
+    readonly length: int;
 
     /**
      * Returns the character at the specified index.
@@ -218,12 +223,12 @@ declare global {
     /**
      * Returns the position of the first occurrence of a substring.
      */
-    indexOf(searchString: string, position?: number): number;
+    indexOf(searchString: string, position?: number): int;
 
     /**
      * Returns the last occurrence of a substring in the string.
      */
-    lastIndexOf(searchString: string, position?: number): number;
+    lastIndexOf(searchString: string, position?: number): int;
 
     /**
      * Determines whether a string contains another string.
@@ -313,7 +318,7 @@ declare global {
     /**
      * Searches for a match in a string, and returns the index.
      */
-    search(regexp: RegExp): number;
+    search(regexp: RegExp): int;
   }
 
   interface StringConstructor {
@@ -390,7 +395,7 @@ declare global {
    */
   interface Function {
     prototype: any;
-    readonly length: number;
+    readonly length: int;
     call(thisArg: any, ...argArray: any[]): any;
     apply(thisArg: any, argArray?: any): any;
     bind(thisArg: any, ...argArray: any[]): any;
@@ -611,12 +616,12 @@ declare global {
    */
   interface IArguments {
     [index: number]: any;
-    length: number;
+    length: int;
     callee: Function;
   }
 
   interface ArrayLike<T> {
-    readonly length: number;
+    readonly length: int;
     readonly [n: number]: T;
   }
 }
