@@ -17,20 +17,6 @@ import { int } from "@tsonic/types";
 
 declare global {
   /**
-   * Primitive types (required by TypeScript compiler)
-   * Note: null, void are intrinsic and don't need type aliases
-   */
-  type string = string;
-  type number = number;
-  type boolean = boolean;
-  type symbol = symbol;
-  type bigint = bigint;
-  type undefined = undefined;
-  type any = any;
-  type unknown = unknown;
-  type never = never;
-
-  /**
    * Array type with full JavaScript API
    * In JS mode, these compile to Tsonic.JSRuntime extension methods
    */
