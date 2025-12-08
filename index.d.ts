@@ -29,7 +29,7 @@ declare global {
     /**
      * Returns the item located at the specified index.
      */
-    [n: int]: T;
+    [n: number]: T;
 
     /**
      * Appends new elements to the end of an array, and returns the new length.
@@ -154,7 +154,7 @@ declare global {
 
   interface ReadonlyArray<T> {
     readonly length: int;
-    readonly [n: int]: T;
+    readonly [n: number]: T;
     slice(start?: int, end?: int): T[];
     indexOf(searchElement: T, fromIndex?: int): int;
     lastIndexOf(searchElement: T, fromIndex?: int): int;
@@ -601,14 +601,14 @@ declare global {
    * Additional types
    */
   interface IArguments {
-    [index: int]: any;
+    [index: number]: any;
     length: int;
     callee: Function;
   }
 
   interface ArrayLike<T> {
     readonly length: int;
-    readonly [n: int]: T;
+    readonly [n: number]: T;
   }
 }
 
