@@ -29,7 +29,7 @@ declare global {
     /**
      * Returns the item located at the specified index.
      */
-    [n: number]: T;
+    [n: int]: T;
 
     /**
      * Appends new elements to the end of an array, and returns the new length.
@@ -54,67 +54,67 @@ declare global {
     /**
      * Returns a copy of a section of an array.
      */
-    slice(start?: number, end?: number): T[];
+    slice(start?: int, end?: int): T[];
 
     /**
      * Removes elements from an array and, if necessary, inserts new elements, returning deleted elements.
      */
-    splice(start: number, deleteCount?: number, ...items: T[]): T[];
+    splice(start: int, deleteCount?: int, ...items: T[]): T[];
 
     /**
      * Returns the index of the first occurrence of a value in an array, or -1 if it is not present.
      */
-    indexOf(searchElement: T, fromIndex?: number): int;
+    indexOf(searchElement: T, fromIndex?: int): int;
 
     /**
      * Returns the index of the last occurrence of a specified value in an array, or -1 if it is not present.
      */
-    lastIndexOf(searchElement: T, fromIndex?: number): int;
+    lastIndexOf(searchElement: T, fromIndex?: int): int;
 
     /**
      * Determines whether all the members of an array satisfy the specified test.
      */
-    every(predicate: (value: T, index: number, array: T[]) => unknown): boolean;
+    every(predicate: (value: T, index: int, array: T[]) => unknown): boolean;
 
     /**
      * Determines whether the specified callback function returns true for any element of an array.
      */
-    some(predicate: (value: T, index: number, array: T[]) => unknown): boolean;
+    some(predicate: (value: T, index: int, array: T[]) => unknown): boolean;
 
     /**
      * Performs the specified action for each element in an array.
      */
-    forEach(callbackfn: (value: T, index: number, array: T[]) => void): void;
+    forEach(callbackfn: (value: T, index: int, array: T[]) => void): void;
 
     /**
      * Calls a defined callback function on each element of an array, and returns an array of the results.
      */
-    map<U>(callbackfn: (value: T, index: number, array: T[]) => U): U[];
+    map<U>(callbackfn: (value: T, index: int, array: T[]) => U): U[];
 
     /**
      * Returns the elements of an array that meet the condition specified in a callback function.
      */
-    filter(predicate: (value: T, index: number, array: T[]) => unknown): T[];
+    filter(predicate: (value: T, index: int, array: T[]) => unknown): T[];
 
     /**
      * Calls the specified callback function for all the elements in an array. The return value is the accumulated result.
      */
-    reduce<U>(callbackfn: (previousValue: U, currentValue: T, currentIndex: number, array: T[]) => U, initialValue: U): U;
+    reduce<U>(callbackfn: (previousValue: U, currentValue: T, currentIndex: int, array: T[]) => U, initialValue: U): U;
 
     /**
      * Returns the value of the first element in the array where predicate is true, and undefined otherwise.
      */
-    find(predicate: (value: T, index: number, array: T[]) => unknown): T | undefined;
+    find(predicate: (value: T, index: int, array: T[]) => unknown): T | undefined;
 
     /**
      * Returns the index of the first element in the array where predicate is true, and -1 otherwise.
      */
-    findIndex(predicate: (value: T, index: number, array: T[]) => unknown): int;
+    findIndex(predicate: (value: T, index: int, array: T[]) => unknown): int;
 
     /**
      * Determines whether an array includes a certain element.
      */
-    includes(searchElement: T, fromIndex?: number): boolean;
+    includes(searchElement: T, fromIndex?: int): boolean;
 
     /**
      * Sorts an array in place.
@@ -139,44 +139,44 @@ declare global {
     /**
      * Returns the value of the element at the specified index, or undefined if the index is out of bounds.
      */
-    at(index: number): T | undefined;
+    at(index: int): T | undefined;
 
     /**
      * Returns a new array with all sub-array elements concatenated into it recursively up to the specified depth.
      */
-    flat<D extends number = 1>(depth?: D): any[];
+    flat<D extends int = 1>(depth?: D): any[];
 
     /**
      * Calls a defined callback function on each element of an array, and then flattens the result by one level.
      */
-    flatMap<U>(callback: (value: T, index: number, array: T[]) => U | U[]): U[];
+    flatMap<U>(callback: (value: T, index: int, array: T[]) => U | U[]): U[];
   }
 
   interface ReadonlyArray<T> {
     readonly length: int;
-    readonly [n: number]: T;
-    slice(start?: number, end?: number): T[];
-    indexOf(searchElement: T, fromIndex?: number): int;
-    lastIndexOf(searchElement: T, fromIndex?: number): int;
-    every(predicate: (value: T, index: number, array: readonly T[]) => unknown): boolean;
-    some(predicate: (value: T, index: number, array: readonly T[]) => unknown): boolean;
-    forEach(callbackfn: (value: T, index: number, array: readonly T[]) => void): void;
-    map<U>(callbackfn: (value: T, index: number, array: readonly T[]) => U): U[];
-    filter(predicate: (value: T, index: number, array: readonly T[]) => unknown): T[];
-    reduce<U>(callbackfn: (previousValue: U, currentValue: T, currentIndex: number, array: readonly T[]) => U, initialValue: U): U;
-    find(predicate: (value: T, index: number, array: readonly T[]) => unknown): T | undefined;
-    findIndex(predicate: (value: T, index: number, array: readonly T[]) => unknown): int;
-    includes(searchElement: T, fromIndex?: number): boolean;
+    readonly [n: int]: T;
+    slice(start?: int, end?: int): T[];
+    indexOf(searchElement: T, fromIndex?: int): int;
+    lastIndexOf(searchElement: T, fromIndex?: int): int;
+    every(predicate: (value: T, index: int, array: readonly T[]) => unknown): boolean;
+    some(predicate: (value: T, index: int, array: readonly T[]) => unknown): boolean;
+    forEach(callbackfn: (value: T, index: int, array: readonly T[]) => void): void;
+    map<U>(callbackfn: (value: T, index: int, array: readonly T[]) => U): U[];
+    filter(predicate: (value: T, index: int, array: readonly T[]) => unknown): T[];
+    reduce<U>(callbackfn: (previousValue: U, currentValue: T, currentIndex: int, array: readonly T[]) => U, initialValue: U): U;
+    find(predicate: (value: T, index: int, array: readonly T[]) => unknown): T | undefined;
+    findIndex(predicate: (value: T, index: int, array: readonly T[]) => unknown): int;
+    includes(searchElement: T, fromIndex?: int): boolean;
     concat(...items: (T | readonly T[])[]): T[];
     join(separator?: string): string;
-    at(index: number): T | undefined;
+    at(index: int): T | undefined;
   }
 
   interface ArrayConstructor {
     new <T>(...items: T[]): T[];
     isArray(arg: any): arg is any[];
     from<T>(arrayLike: ArrayLike<T>): T[];
-    from<T, U>(arrayLike: ArrayLike<T>, mapfn: (v: T, k: number) => U): U[];
+    from<T, U>(arrayLike: ArrayLike<T>, mapfn: (v: T, k: int) => U): U[];
     of<T>(...items: T[]): T[];
   }
 
@@ -194,12 +194,12 @@ declare global {
     /**
      * Returns the character at the specified index.
      */
-    charAt(pos: number): string;
+    charAt(pos: int): string;
 
     /**
      * Returns the Unicode value of the character at the specified location.
      */
-    charCodeAt(index: number): number;
+    charCodeAt(index: int): int;
 
     /**
      * Returns a string that contains the concatenation of two or more strings.
@@ -209,42 +209,42 @@ declare global {
     /**
      * Returns the position of the first occurrence of a substring.
      */
-    indexOf(searchString: string, position?: number): int;
+    indexOf(searchString: string, position?: int): int;
 
     /**
      * Returns the last occurrence of a substring in the string.
      */
-    lastIndexOf(searchString: string, position?: number): int;
+    lastIndexOf(searchString: string, position?: int): int;
 
     /**
      * Determines whether a string contains another string.
      */
-    includes(searchString: string, position?: number): boolean;
+    includes(searchString: string, position?: int): boolean;
 
     /**
      * Determines whether a string begins with the characters of a specified string.
      */
-    startsWith(searchString: string, position?: number): boolean;
+    startsWith(searchString: string, position?: int): boolean;
 
     /**
      * Determines whether a string ends with the characters of a specified string.
      */
-    endsWith(searchString: string, endPosition?: number): boolean;
+    endsWith(searchString: string, endPosition?: int): boolean;
 
     /**
      * Returns a copy of this string starting at the specified index.
      */
-    slice(start?: number, end?: number): string;
+    slice(start?: int, end?: int): string;
 
     /**
      * Returns a section of a string.
      */
-    substring(start: number, end?: number): string;
+    substring(start: int, end?: int): string;
 
     /**
      * Gets a substring beginning at the specified location and having the specified length.
      */
-    substr(from: number, length?: number): string;
+    substr(from: int, length?: int): string;
 
     /**
      * Converts all the alphabetic characters in a string to lowercase.
@@ -274,17 +274,17 @@ declare global {
     /**
      * Pads the current string with a given string to a given length from the start.
      */
-    padStart(targetLength: number, padString?: string): string;
+    padStart(targetLength: int, padString?: string): string;
 
     /**
      * Pads the current string with a given string to a given length from the end.
      */
-    padEnd(targetLength: number, padString?: string): string;
+    padEnd(targetLength: int, padString?: string): string;
 
     /**
      * Returns a string that is repeated the specified number of times.
      */
-    repeat(count: number): string;
+    repeat(count: int): string;
 
     /**
      * Replaces text in a string, using a regular expression or search string.
@@ -294,7 +294,7 @@ declare global {
     /**
      * Split a string into substrings using the specified separator.
      */
-    split(separator: string | RegExp, limit?: number): string[];
+    split(separator: string | RegExp, limit?: int): string[];
 
     /**
      * Matches a string with a regular expression.
@@ -310,7 +310,7 @@ declare global {
   interface StringConstructor {
     new (value?: any): String;
     (value?: any): string;
-    fromCharCode(...codes: number[]): string;
+    fromCharCode(...codes: int[]): string;
   }
 
   const String: StringConstructor;
@@ -407,7 +407,7 @@ declare global {
     readonly global: boolean;
     readonly ignoreCase: boolean;
     readonly multiline: boolean;
-    lastIndex: number;
+    lastIndex: int;
   }
 
   interface RegExpConstructor {
@@ -418,12 +418,12 @@ declare global {
   const RegExp: RegExpConstructor;
 
   interface RegExpExecArray extends Array<string> {
-    index: number;
+    index: int;
     input: string;
   }
 
   interface RegExpMatchArray extends Array<string> {
-    index?: number;
+    index?: int;
     input?: string;
   }
 
@@ -601,14 +601,14 @@ declare global {
    * Additional types
    */
   interface IArguments {
-    [index: number]: any;
+    [index: int]: any;
     length: int;
     callee: Function;
   }
 
   interface ArrayLike<T> {
     readonly length: int;
-    readonly [n: number]: T;
+    readonly [n: int]: T;
   }
 }
 

@@ -1,6 +1,6 @@
 {
   "name": "@tsonic/js-globals",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Global type definitions for Tsonic JS mode (noLib: true, JavaScript semantics)",
   "main": "index.d.ts",
   "types": "index.d.ts",
@@ -12,7 +12,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@tsonic/types": "^0.3.0"
+    "@tsonic/types": "^0.3.1"
   },
   "devDependencies": {
     "typescript": "^5.0.0"
