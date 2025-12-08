@@ -9,7 +9,7 @@
  * Key principle: Array<T> HAS JS members like .length and .map
  * This enables JS-style programming while compiling to C# with Tsonic.JSRuntime
  *
- * Index-space values (length, indexOf, etc.) use branded `int` type from
+ * Index-space values (length, indexOf, etc.) use `int` type alias from
  * @tsonic/types to enable numeric proof validation for array indexing.
  */
 
