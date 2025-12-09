@@ -1,6 +1,6 @@
 {
   "name": "@tsonic/js-globals",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "description": "Global type definitions for Tsonic JS mode (noLib: true, JavaScript semantics)",
   "main": "index.d.ts",
   "types": "index.d.ts",

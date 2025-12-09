@@ -570,15 +570,25 @@ declare global {
   /**
    * Iterator types
    */
-  interface Iterator<T> {
-    next(): IteratorResult<T>;
-    return?(value?: any): IteratorResult<T>;
-    throw?(e?: any): IteratorResult<T>;
+  interface Iterator<T, TReturn = any, TNext = undefined> {
+    next(...args: [] | [TNext]): IteratorResult<T, TReturn>;
+    return?(value?: TReturn): IteratorResult<T, TReturn>;
+    throw?(e?: any): IteratorResult<T, TReturn>;
   }
 
-  interface IteratorResult<T> {
+  interface IteratorResult<T, TReturn = any> {
     done: boolean;
+    value: T | TReturn;
+  }
+
+  interface IteratorYieldResult<T> {
+    done: false;
     value: T;
+  }
+
+  interface IteratorReturnResult<TReturn> {
+    done: true;
+    value: TReturn;
   }
 
   interface Iterable<T> {
@@ -587,6 +597,40 @@ declare global {
 
   interface IterableIterator<T> extends Iterator<T> {
     [Symbol.iterator](): IterableIterator<T>;
+  }
+
+  /**
+   * Async Iterator types (for for-await loops)
+   */
+  interface AsyncIterator<T, TReturn = any, TNext = undefined> {
+    next(...args: [] | [TNext]): Promise<IteratorResult<T, TReturn>>;
+    return?(value?: TReturn | PromiseLike<TReturn>): Promise<IteratorResult<T, TReturn>>;
+    throw?(e?: any): Promise<IteratorResult<T, TReturn>>;
+  }
+
+  interface AsyncIterable<T> {
+    [Symbol.asyncIterator](): AsyncIterator<T>;
+  }
+
+  interface AsyncIterableIterator<T> extends AsyncIterator<T> {
+    [Symbol.asyncIterator](): AsyncIterableIterator<T>;
+  }
+
+  /**
+   * Generator types
+   */
+  interface Generator<T = unknown, TReturn = any, TNext = unknown> extends Iterator<T, TReturn, TNext> {
+    next(...args: [] | [TNext]): IteratorResult<T, TReturn>;
+    return(value: TReturn): IteratorResult<T, TReturn>;
+    throw(e: any): IteratorResult<T, TReturn>;
+    [Symbol.iterator](): Generator<T, TReturn, TNext>;
+  }
+
+  interface AsyncGenerator<T = unknown, TReturn = any, TNext = unknown> extends AsyncIterator<T, TReturn, TNext> {
+    next(...args: [] | [TNext]): Promise<IteratorResult<T, TReturn>>;
+    return(value: TReturn | PromiseLike<TReturn>): Promise<IteratorResult<T, TReturn>>;
+    throw(e: any): Promise<IteratorResult<T, TReturn>>;
+    [Symbol.asyncIterator](): AsyncGenerator<T, TReturn, TNext>;
   }
 
   /**
