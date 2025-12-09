@@ -150,6 +150,11 @@ declare global {
      * Calls a defined callback function on each element of an array, and then flattens the result by one level.
      */
     flatMap<U>(callback: (value: T, index: int, array: T[]) => U | U[]): U[];
+
+    /**
+     * Returns an iterator over the array elements.
+     */
+    [Symbol.iterator](): IterableIterator<T>;
   }
 
   interface ReadonlyArray<T> {
@@ -170,6 +175,7 @@ declare global {
     concat(...items: (T | readonly T[])[]): T[];
     join(separator?: string): string;
     at(index: int): T | undefined;
+    [Symbol.iterator](): IterableIterator<T>;
   }
 
   interface ArrayConstructor {
