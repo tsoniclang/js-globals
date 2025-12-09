@@ -525,6 +525,59 @@ declare global {
   const Error: ErrorConstructor;
 
   /**
+   * Map - key-value collection
+   */
+  interface Map<K, V> {
+    readonly size: int;
+    get(key: K): V | undefined;
+    set(key: K, value: V): this;
+    has(key: K): boolean;
+    delete(key: K): boolean;
+    clear(): void;
+    keys(): IterableIterator<K>;
+    values(): IterableIterator<V>;
+    entries(): IterableIterator<[K, V]>;
+    forEach(callbackfn: (value: V, key: K, map: Map<K, V>) => void): void;
+    [Symbol.iterator](): IterableIterator<[K, V]>;
+  }
+
+  interface MapConstructor {
+    new <K, V>(entries?: readonly (readonly [K, V])[] | null): Map<K, V>;
+  }
+
+  const Map: MapConstructor;
+
+  /**
+   * Set - unique value collection
+   */
+  interface Set<T> {
+    readonly size: int;
+    add(value: T): this;
+    has(value: T): boolean;
+    delete(value: T): boolean;
+    clear(): void;
+    keys(): IterableIterator<T>;
+    values(): IterableIterator<T>;
+    entries(): IterableIterator<[T, T]>;
+    forEach(callbackfn: (value: T, value2: T, set: Set<T>) => void): void;
+    [Symbol.iterator](): IterableIterator<T>;
+  }
+
+  interface SetConstructor {
+    new <T>(values?: readonly T[] | null): Set<T>;
+  }
+
+  const Set: SetConstructor;
+
+  /**
+   * Timer functions
+   */
+  function setTimeout(callback: (...args: any[]) => void, ms?: number, ...args: any[]): number;
+  function clearTimeout(id: number | undefined): void;
+  function setInterval(callback: (...args: any[]) => void, ms?: number, ...args: any[]): number;
+  function clearInterval(id: number | undefined): void;
+
+  /**
    * Utility types (built into TypeScript)
    */
   type Partial<T> = { [P in keyof T]?: T[P] };
