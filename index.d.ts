@@ -1,10 +1,10 @@
 /**
  * @tsonic/js-globals
  *
- * Global type definitions for Tsonic in JS mode.
+ * JavaScript-specific global type definitions for Tsonic JS mode.
  *
- * These provide JavaScript built-in types and methods for TypeScript
- * when noLib: true is set, enabling JavaScript semantics in Tsonic code.
+ * This package extends the base types from @tsonic/globals with full
+ * JavaScript APIs. Use alongside @tsonic/globals in typeRoots.
  *
  * Key principle: Array<T> HAS JS members like .length and .map
  * This enables JS-style programming while compiling to C# with Tsonic.JSRuntime
@@ -17,19 +17,14 @@ import { int } from "@tsonic/types";
 
 declare global {
   /**
-   * Array type with full JavaScript API
-   * In JS mode, these compile to Tsonic.JSRuntime extension methods
+   * Array type - extends base with full JavaScript API
+   * These compile to Tsonic.JSRuntime extension methods
    */
   interface Array<T> {
     /**
      * Gets or sets the length of the array.
      */
     length: int;
-
-    /**
-     * Returns the item located at the specified index.
-     */
-    [n: number]: T;
 
     /**
      * Appends new elements to the end of an array, and returns the new length.
@@ -150,16 +145,10 @@ declare global {
      * Calls a defined callback function on each element of an array, and then flattens the result by one level.
      */
     flatMap<U>(callback: (value: T, index: int, array: T[]) => U | U[]): U[];
-
-    /**
-     * Returns an iterator over the array elements.
-     */
-    [Symbol.iterator](): IterableIterator<T>;
   }
 
   interface ReadonlyArray<T> {
     readonly length: int;
-    readonly [n: number]: T;
     slice(start?: int, end?: int): T[];
     indexOf(searchElement: T, fromIndex?: int): int;
     lastIndexOf(searchElement: T, fromIndex?: int): int;
@@ -175,7 +164,6 @@ declare global {
     concat(...items: (T | readonly T[])[]): T[];
     join(separator?: string): string;
     at(index: int): T | undefined;
-    [Symbol.iterator](): IterableIterator<T>;
   }
 
   interface ArrayConstructor {
@@ -189,7 +177,7 @@ declare global {
   const Array: ArrayConstructor;
 
   /**
-   * String type with full JavaScript API
+   * String type - extends base with full JavaScript API
    */
   interface String {
     /**
@@ -322,7 +310,7 @@ declare global {
   const String: StringConstructor;
 
   /**
-   * Number type
+   * Number type - extends base with methods
    */
   interface Number {
     toString(radix?: number): string;
@@ -352,8 +340,6 @@ declare global {
   /**
    * Boolean type
    */
-  interface Boolean {}
-
   interface BooleanConstructor {
     new (value?: any): Boolean;
     (value?: any): boolean;
@@ -362,10 +348,9 @@ declare global {
   const Boolean: BooleanConstructor;
 
   /**
-   * Object type
+   * Object type - extends base with methods
    */
   interface Object {
-    constructor: Function;
     toString(): string;
     hasOwnProperty(v: PropertyKey): boolean;
   }
@@ -383,18 +368,14 @@ declare global {
   const Object: ObjectConstructor;
 
   /**
-   * Function type
+   * Function type - extends base with methods
    */
   interface Function {
-    prototype: any;
     readonly length: int;
     call(thisArg: any, ...argArray: any[]): any;
     apply(thisArg: any, argArray?: any): any;
     bind(thisArg: any, ...argArray: any[]): any;
   }
-
-  interface CallableFunction extends Function {}
-  interface NewableFunction extends Function {}
 
   interface FunctionConstructor {
     new (...args: string[]): Function;
@@ -404,7 +385,7 @@ declare global {
   const Function: FunctionConstructor;
 
   /**
-   * RegExp type
+   * RegExp type - extends base with full API
    */
   interface RegExp {
     exec(string: string): RegExpExecArray | null;
@@ -432,23 +413,6 @@ declare global {
     index?: int;
     input?: string;
   }
-
-  /**
-   * Symbol type
-   */
-  interface SymbolConstructor {
-    readonly iterator: symbol;
-    readonly asyncIterator: symbol;
-    readonly hasInstance: symbol;
-    readonly isConcatSpreadable: symbol;
-    readonly species: symbol;
-    readonly toPrimitive: symbol;
-    readonly toStringTag: symbol;
-  }
-
-  const Symbol: SymbolConstructor;
-
-  type PropertyKey = string | number | symbol;
 
   /**
    * Math object
@@ -576,129 +540,6 @@ declare global {
   function clearTimeout(id: number | undefined): void;
   function setInterval(callback: (...args: any[]) => void, ms?: number, ...args: any[]): number;
   function clearInterval(id: number | undefined): void;
-
-  /**
-   * Utility types (built into TypeScript)
-   */
-  type Partial<T> = { [P in keyof T]?: T[P] };
-  type Required<T> = { [P in keyof T]-?: T[P] };
-  type Readonly<T> = { readonly [P in keyof T]: T[P] };
-  type Pick<T, K extends keyof T> = { [P in K]: T[P] };
-  type Record<K extends keyof any, T> = { [P in K]: T };
-  type Exclude<T, U> = T extends U ? never : T;
-  type Extract<T, U> = T extends U ? T : never;
-  type Omit<T, K extends keyof any> = Pick<T, Exclude<keyof T, K>>;
-  type NonNullable<T> = T extends null | undefined ? never : T;
-  type Parameters<T extends (...args: any) => any> = T extends (...args: infer P) => any ? P : never;
-  type ConstructorParameters<T extends new (...args: any) => any> = T extends new (...args: infer P) => any ? P : never;
-  type ReturnType<T extends (...args: any) => any> = T extends (...args: any) => infer R ? R : any;
-  type InstanceType<T extends new (...args: any) => any> = T extends new (...args: any) => infer R ? R : any;
-
-  /**
-   * Promise type
-   */
-  interface Promise<T> {
-    then<TResult1 = T, TResult2 = never>(
-      onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
-      onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null
-    ): Promise<TResult1 | TResult2>;
-    catch<TResult = never>(
-      onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null
-    ): Promise<T | TResult>;
-    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
-  }
-
-  interface PromiseLike<T> {
-    then<TResult1 = T, TResult2 = never>(
-      onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
-      onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null
-    ): PromiseLike<TResult1 | TResult2>;
-  }
-
-  interface PromiseConstructor {
-    new <T>(executor: (resolve: (value: T | PromiseLike<T>) => void, reject: (reason?: any) => void) => void): Promise<T>;
-    resolve(): Promise<void>;
-    resolve<T>(value: T | PromiseLike<T>): Promise<T>;
-    reject<T = never>(reason?: any): Promise<T>;
-    all<T>(values: readonly (T | PromiseLike<T>)[]): Promise<T[]>;
-    race<T>(values: readonly (T | PromiseLike<T>)[]): Promise<T>;
-  }
-
-  const Promise: PromiseConstructor;
-
-  /**
-   * Iterator types
-   */
-  interface Iterator<T, TReturn = any, TNext = undefined> {
-    next(...args: [] | [TNext]): IteratorResult<T, TReturn>;
-    return?(value?: TReturn): IteratorResult<T, TReturn>;
-    throw?(e?: any): IteratorResult<T, TReturn>;
-  }
-
-  interface IteratorResult<T, TReturn = any> {
-    done: boolean;
-    value: T | TReturn;
-  }
-
-  interface IteratorYieldResult<T> {
-    done: false;
-    value: T;
-  }
-
-  interface IteratorReturnResult<TReturn> {
-    done: true;
-    value: TReturn;
-  }
-
-  interface Iterable<T> {
-    [Symbol.iterator](): Iterator<T>;
-  }
-
-  interface IterableIterator<T> extends Iterator<T> {
-    [Symbol.iterator](): IterableIterator<T>;
-  }
-
-  /**
-   * Async Iterator types (for for-await loops)
-   */
-  interface AsyncIterator<T, TReturn = any, TNext = undefined> {
-    next(...args: [] | [TNext]): Promise<IteratorResult<T, TReturn>>;
-    return?(value?: TReturn | PromiseLike<TReturn>): Promise<IteratorResult<T, TReturn>>;
-    throw?(e?: any): Promise<IteratorResult<T, TReturn>>;
-  }
-
-  interface AsyncIterable<T> {
-    [Symbol.asyncIterator](): AsyncIterator<T>;
-  }
-
-  interface AsyncIterableIterator<T> extends AsyncIterator<T> {
-    [Symbol.asyncIterator](): AsyncIterableIterator<T>;
-  }
-
-  /**
-   * Generator types
-   */
-  interface Generator<T = unknown, TReturn = any, TNext = unknown> extends Iterator<T, TReturn, TNext> {
-    next(...args: [] | [TNext]): IteratorResult<T, TReturn>;
-    return(value: TReturn): IteratorResult<T, TReturn>;
-    throw(e: any): IteratorResult<T, TReturn>;
-    [Symbol.iterator](): Generator<T, TReturn, TNext>;
-  }
-
-  interface AsyncGenerator<T = unknown, TReturn = any, TNext = unknown> extends AsyncIterator<T, TReturn, TNext> {
-    next(...args: [] | [TNext]): Promise<IteratorResult<T, TReturn>>;
-    return(value: TReturn | PromiseLike<TReturn>): Promise<IteratorResult<T, TReturn>>;
-    throw(e: any): Promise<IteratorResult<T, TReturn>>;
-    [Symbol.asyncIterator](): AsyncGenerator<T, TReturn, TNext>;
-  }
-
-  /**
-   * Template literal type utilities
-   */
-  type Uppercase<S extends string> = intrinsic;
-  type Lowercase<S extends string> = intrinsic;
-  type Capitalize<S extends string> = intrinsic;
-  type Uncapitalize<S extends string> = intrinsic;
 
   /**
    * Additional types
