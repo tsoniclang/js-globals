@@ -13,7 +13,7 @@
  * @tsonic/core to enable numeric proof validation for array indexing.
  */
 
-import { int } from "@tsonic/core";
+import { int } from "@tsonic/core/types.js";
 
 declare global {
   /**
