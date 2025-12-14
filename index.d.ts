@@ -10,10 +10,10 @@
  * This enables JS-style programming while compiling to C# with Tsonic.JSRuntime
  *
  * Index-space values (length, indexOf, etc.) use `int` type alias from
- * @tsonic/types to enable numeric proof validation for array indexing.
+ * @tsonic/core to enable numeric proof validation for array indexing.
  */
 
-import { int } from "@tsonic/types";
+import { int } from "@tsonic/core";
 
 declare global {
   /**
