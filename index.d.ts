@@ -13,7 +13,7 @@
  * @tsonic/core to enable numeric proof validation for array indexing.
  */
 
-import { int } from "@tsonic/core/types.js";
+import { int, long } from "@tsonic/core/types.js";
 
 declare global {
   /**
@@ -332,7 +332,7 @@ declare global {
     isNaN(value: unknown): value is number;
     isSafeInteger(value: unknown): value is number;
     parseFloat(string: string): number;
-    parseInt(string: string, radix?: number): number;
+    parseInt(string: string, radix?: number): long | undefined;
   }
 
   const Number: NumberConstructor;
@@ -431,19 +431,21 @@ declare global {
     asin(x: number): number;
     atan(x: number): number;
     atan2(y: number, x: number): number;
-    ceil(x: number): number;
+    ceil(x: number): long;
     cos(x: number): number;
     exp(x: number): number;
-    floor(x: number): number;
+    floor(x: number): long;
     log(x: number): number;
     max(...values: number[]): number;
     min(...values: number[]): number;
     pow(x: number, y: number): number;
     random(): number;
-    round(x: number): number;
+    round(x: number): long;
+    sign(x: number): int;
     sin(x: number): number;
     sqrt(x: number): number;
     tan(x: number): number;
+    trunc(x: number): long;
   }
 
   const Math: Math;
