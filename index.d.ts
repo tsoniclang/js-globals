@@ -332,7 +332,7 @@ declare global {
     isNaN(value: unknown): value is number;
     isSafeInteger(value: unknown): value is number;
     parseFloat(string: string): number;
-    parseInt(string: string, radix?: number): long | undefined;
+    parseInt(string: string, radix?: int): long | undefined;
   }
 
   const Number: NumberConstructor;
