@@ -12,7 +12,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@tsonic/core": "^0.1.0"
+    "@tsonic/core": "*"
   },
   "devDependencies": {
     "typescript": "^5.0.0"
