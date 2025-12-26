@@ -454,9 +454,8 @@ declare global {
    * JSON object
    */
   interface JSON {
-    parse(text: string, reviver?: (this: any, key: string, value: any) => any): any;
-    stringify(value: any, replacer?: (this: any, key: string, value: any) => any, space?: string | number): string;
-    stringify(value: any, replacer?: (number | string)[] | null, space?: string | number): string;
+    parse<T>(text: string): T;
+    stringify<T>(value: T, replacer?: (number | string)[] | null, space?: string | int): string;
   }
 
   const JSON: JSON;
