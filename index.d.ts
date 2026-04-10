@@ -1,13 +1,12 @@
 /**
  * @tsonic/js-globals
  *
- * JavaScript-specific global type definitions for Tsonic JS mode.
+ * Retired JavaScript global type package.
  *
- * This package extends the base types from @tsonic/globals with full
- * JavaScript APIs. Use alongside @tsonic/globals in typeRoots.
+ * New JS projects should use the first-party @tsonic/js surface instead.
  *
  * Key principle: Array<T> HAS JS members like .length and .map
- * This enables JS-style programming while compiling to C# with Tsonic.JSRuntime
+ * The active architecture now comes from first-party source packages.
  *
  * Index-space values (length, indexOf, etc.) use `int` type alias from
  * @tsonic/core to enable numeric proof validation for array indexing.
@@ -18,7 +17,7 @@ import { int, long } from "@tsonic/core/types.js";
 declare global {
   /**
    * Array type - extends base with full JavaScript API
-   * These compile to Tsonic.JSRuntime extension methods
+   * Retained only for compatibility with older consumers.
    */
   interface Array<T> {
     /**
